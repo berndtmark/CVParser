@@ -4,6 +4,7 @@ namespace Parser.Models;
 public sealed class ResumeContext
 {
     public required string SourcePath { get; init; }
+    public PipelineOptions Options { get; init; } = new();
 
     public string? RawText { get; set; }
     public Dictionary<string, string> Sections { get; } = new(StringComparer.OrdinalIgnoreCase);

@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Parser;
+using Parser.Models;
 using Parser.Middleware;
 using Parser.Pipeline;
 using Parser.Stages;
@@ -20,7 +21,14 @@ ResumePipeline pipeline = new ResumePipelineBuilder(provider)
     .Add<SectionSplitStage>()
     .Add<ContactExtractionStage>();
 
-var result = await pipeline.RunAsync(args[0]);
+// Optional 2nd arg: comma-separated stage names to run (default: all)
+var options = new PipelineOptions
+{
+    Stages = args.Length > 1
+        ? args[1].Split(',', StringSplitOptions.TrimEntries).Select(s => Enum.Parse<Stage>(s, ignoreCase: true)).ToArray()
+        : null
+};
+var result = await pipeline.RunAsync(args[0], options);
 
 Console.WriteLine($"Name:  {result.Contact?.Name}");
 Console.WriteLine($"Email: {result.Contact?.Email}");

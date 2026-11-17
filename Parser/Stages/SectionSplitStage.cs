@@ -7,7 +7,7 @@ namespace Parser.Stages;
 /// <summary>Splits text into sections by common headings (Experience, Education, Skills...).</summary>
 public sealed partial class SectionSplitStage : IPipelineStage
 {
-    public string Name => "SectionSplit";
+    public Stage Name => Stage.SectionSplit;
 
     [GeneratedRegex(@"^\s*(summary|objective|experience|work experience|education|skills|projects|certifications)\s*:?\s*$",
         RegexOptions.IgnoreCase)]

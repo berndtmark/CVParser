@@ -6,7 +6,7 @@ namespace Parser.Stages;
 
 public sealed partial class ContactExtractionStage : IPipelineStage
 {
-    public string Name => "ContactExtraction";
+    public Stage Name => Stage.ContactExtraction;
 
     [GeneratedRegex(@"[\w.+-]+@[\w-]+\.[\w.-]+")]
     private static partial Regex EmailRegex();
