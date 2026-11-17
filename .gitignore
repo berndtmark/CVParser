@@ -1,0 +1,43 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+publish/
+
+# Visual Studio / Rider / VS Code
+.vs/
+.idea/
+*.user
+*.suo
+*.userprefs
+*.DotSettings.user
+.vscode/*
+!.vscode/launch.json
+!.vscode/tasks.json
+!.vscode/settings.json
+!.vscode/extensions.json
+
+# NuGet
+*.nupkg
+*.snupkg
+project.lock.json
+
+# Test / coverage
+TestResults/
+coverage/
+*.coverage
+*.trx
+
+# Secrets / local config
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
