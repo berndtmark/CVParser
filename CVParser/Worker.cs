@@ -22,7 +22,7 @@ namespace CVParser
                 .Add<ContactExtractionStage>()
                 .Build();
 
-            var result = await pipeline.RunAsync(new PipelineOptions());
+            var result = await pipeline.RunAsync(new PipelineOptions { FileName = "sample.txt" });
         }
     }
 }
