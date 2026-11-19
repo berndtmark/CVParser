@@ -1,44 +1,43 @@
 namespace CVParser.Pipeline;
 
-public sealed class ResumePipelineBuilder(IServiceProvider services) : IResumePipelineBuilder
+public sealed class PipelineBuilder<TContext>(IServiceProvider services) : IPipelineBuilder<TContext>
+    where TContext : IPipelineContext, new()
 {
-    private readonly List<IPipelineStage> _stages = [];
+    private readonly List<IPipelineStage<TContext>> _stages = [];
     private readonly List<IStageMiddleware> _middleware = [];
 
-    public IResumePipelineBuilder Add<TStage>() where TStage : class, IPipelineStage =>
+    public IPipelineBuilder<TContext> Add<TStage>() where TStage : class, IPipelineStage<TContext> =>
         Add(ActivatorUtilities.GetServiceOrCreateInstance<TStage>(services));
 
-    public IResumePipelineBuilder Add(IPipelineStage stage)
+    public IPipelineBuilder<TContext> Add(IPipelineStage<TContext> stage)
     {
         _stages.Add(stage);
         return this;
     }
 
-    public IResumePipelineBuilder Use<TMiddleware>() where TMiddleware : class, IStageMiddleware
+    public IPipelineBuilder<TContext> Use<TMiddleware>() where TMiddleware : class, IStageMiddleware
     {
         _middleware.Add(ActivatorUtilities.GetServiceOrCreateInstance<TMiddleware>(services));
         return this;
     }
 
-    public ResumePipeline Build()
+    public Pipeline<TContext> Build()
     {
         if (_stages.Count == 0)
             throw new InvalidOperationException("Pipeline needs at least one stage.");
 
         var composed = _stages.Select(stage =>
         {
-            StageDelegate next = (ctx, ct) => stage.ExecuteAsync(ctx, ct);
+            StageDelegate next = (ctx, ct) => stage.ExecuteAsync((TContext)ctx, ct);
             foreach (var mw in Enumerable.Reverse(_middleware))
             {
                 var inner = next;
                 var current = mw;
                 next = (ctx, ct) => current.InvokeAsync(stage, ctx, inner, ct);
             }
-            return (stage, next);
+            return ((IPipelineStage)stage, next);
         }).ToArray();
 
-        return new ResumePipeline(composed);
+        return new Pipeline<TContext>(composed);
     }
-
-    public static implicit operator ResumePipeline(ResumePipelineBuilder builder) => builder.Build();
 }

@@ -1,24 +1,24 @@
 using CVParser.Enums;
-using CVParser.Models;
 
 namespace CVParser.Pipeline;
 
-public sealed class ResumePipeline
+public sealed class Pipeline<TContext> where TContext : IPipelineContext, new()
 {
     private readonly IReadOnlyList<(IPipelineStage Stage, StageDelegate Invoke)> _stages;
 
-    internal ResumePipeline(IReadOnlyList<(IPipelineStage, StageDelegate)> stages) => _stages = stages;
+    internal Pipeline(IReadOnlyList<(IPipelineStage, StageDelegate)> stages) => _stages = stages;
 
     /// <summary>Names of all stages, in order (e.g. to populate a UI picker).</summary>
     public IEnumerable<Stage> Stages => _stages.Select(s => s.Stage.Name);
 
-    public async Task<ResumeContext> RunAsync(PipelineOptions? options = null, CancellationToken ct = default)
+    /// <summary>Creates a context from <paramref name="options"/>, runs every enabled stage, and returns it.</summary>
+    public async Task<TContext> RunAsync(IPipelineOptions options, CancellationToken ct = default)
     {
-        var context = new ResumeContext { Options = options ?? new PipelineOptions() };
+        var context = new TContext { Options = options };
         foreach (var (stage, invoke) in _stages)
         {
             ct.ThrowIfCancellationRequested();
-            if (!context.Options.IsEnabled(stage.Name))
+            if (!options.IsEnabled(stage.Name))
                 continue;
             await invoke(context, ct);
         }

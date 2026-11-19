@@ -5,7 +5,7 @@ using CVParser.Stages;
 
 namespace CVParser
 {
-    public class Worker(ILogger<Worker> logger, IResumePipelineBuilder resumePipelineBuilder) : BackgroundService
+    public class Worker(ILogger<Worker> logger, IPipelineBuilder<ResumeContext> pipelineBuilder) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -20,14 +20,14 @@ namespace CVParser
 
         private async Task Process()
         {
-            ResumePipeline pipeline = resumePipelineBuilder
+            var pipeline = pipelineBuilder
                 .Use<LoggingMiddleware>()
                 .Add<TextExtractionStage>()
                 .Add<SectionSplitStage>()
                 .Add<ContactExtractionStage>()
                 .Build();
 
-            var result = await pipeline.RunAsync(new PipelineOptions { });
+            var result = await pipeline.RunAsync(new PipelineOptions());
         }
     }
 }

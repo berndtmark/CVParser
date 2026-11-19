@@ -5,7 +5,7 @@ using CVParser.Pipeline;
 namespace CVParser.Stages;
 
 /// <summary>Reads plain text. Swap/extend for PDF/DOCX later.</summary>
-public sealed class TextExtractionStage : IPipelineStage
+public sealed class TextExtractionStage : IPipelineStage<ResumeContext>
 {
     public Stage Name => Stage.TextExtraction;
 

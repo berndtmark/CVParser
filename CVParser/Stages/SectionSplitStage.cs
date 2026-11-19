@@ -6,7 +6,7 @@ using CVParser.Pipeline;
 namespace CVParser.Stages;
 
 /// <summary>Splits text into sections by common headings (Experience, Education, Skills...).</summary>
-public sealed partial class SectionSplitStage : IPipelineStage
+public sealed partial class SectionSplitStage : IPipelineStage<ResumeContext>
 {
     public Stage Name => Stage.SectionSplit;
 

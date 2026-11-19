@@ -5,7 +5,7 @@ using CVParser.Pipeline;
 
 namespace CVParser.Stages;
 
-public sealed partial class ContactExtractionStage : IPipelineStage
+public sealed partial class ContactExtractionStage : IPipelineStage<ResumeContext>
 {
     public Stage Name => Stage.ContactExtraction;
 

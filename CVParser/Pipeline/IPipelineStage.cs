@@ -1,10 +1,14 @@
 using CVParser.Enums;
-using CVParser.Models;
 
 namespace CVParser.Pipeline;
 
+/// <summary>Non-generic view of a stage, so middleware doesn't need to know the context type.</summary>
 public interface IPipelineStage
 {
     Stage Name { get; }
-    Task ExecuteAsync(ResumeContext context, CancellationToken ct = default);
+}
+
+public interface IPipelineStage<in TContext> : IPipelineStage where TContext : IPipelineContext
+{
+    Task ExecuteAsync(TContext context, CancellationToken ct = default);
 }
