@@ -1,7 +1,7 @@
-using Parser.Models;
-using Parser.Stages;
+using CVParser.Enums;
+using CVParser.Models;
 
-namespace Parser.Pipeline;
+namespace CVParser.Pipeline;
 
 public sealed class ResumePipeline
 {
@@ -12,10 +12,9 @@ public sealed class ResumePipeline
     /// <summary>Names of all stages, in order (e.g. to populate a UI picker).</summary>
     public IEnumerable<Stage> Stages => _stages.Select(s => s.Stage.Name);
 
-    /// <param name="options">Run configuration. Null = defaults (all stages).</param>
-    public async Task<ResumeContext> RunAsync(string sourcePath, PipelineOptions? options = null, CancellationToken ct = default)
+    public async Task<ResumeContext> RunAsync(PipelineOptions? options = null, CancellationToken ct = default)
     {
-        var context = new ResumeContext { SourcePath = sourcePath, Options = options ?? new PipelineOptions() };
+        var context = new ResumeContext { Options = options ?? new PipelineOptions() };
         foreach (var (stage, invoke) in _stages)
         {
             ct.ThrowIfCancellationRequested();

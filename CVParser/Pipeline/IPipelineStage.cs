@@ -1,7 +1,7 @@
-using Parser.Models;
-using Parser.Stages;
+using CVParser.Enums;
+using CVParser.Models;
 
-namespace Parser.Pipeline;
+namespace CVParser.Pipeline;
 
 public interface IPipelineStage
 {

@@ -1,6 +1,6 @@
-using Parser.Stages;
+using CVParser.Enums;
 
-namespace Parser.Models;
+namespace CVParser.Models;
 
 /// <summary>Per-run configuration passed into the pipeline (e.g. from the UI).</summary>
 public sealed class PipelineOptions

@@ -1,6 +1,6 @@
-using Parser.Models;
+using CVParser.Models;
 
-namespace Parser.Pipeline;
+namespace CVParser.Pipeline;
 
 public delegate Task StageDelegate(ResumeContext context, CancellationToken ct);
 

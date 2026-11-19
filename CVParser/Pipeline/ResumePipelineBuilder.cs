@@ -1,31 +1,24 @@
-using Microsoft.Extensions.DependencyInjection;
+namespace CVParser.Pipeline;
 
-namespace Parser.Pipeline;
-
-public sealed class ResumePipelineBuilder(IServiceProvider services)
+public sealed class ResumePipelineBuilder(IServiceProvider services) : IResumePipelineBuilder
 {
     private readonly List<IPipelineStage> _stages = [];
     private readonly List<IStageMiddleware> _middleware = [];
 
-    /// <summary>Add a stage resolved from DI (falls back to constructing it with injected deps).</summary>
-    public ResumePipelineBuilder Add<TStage>() where TStage : class, IPipelineStage =>
+    public IResumePipelineBuilder Add<TStage>() where TStage : class, IPipelineStage =>
         Add(ActivatorUtilities.GetServiceOrCreateInstance<TStage>(services));
 
-    public ResumePipelineBuilder Add(IPipelineStage stage)
+    public IResumePipelineBuilder Add(IPipelineStage stage)
     {
         _stages.Add(stage);
         return this;
     }
 
-    /// <summary>Add middleware. First registered = outermost.</summary>
-    public ResumePipelineBuilder Use<TMiddleware>() where TMiddleware : class, IStageMiddleware
+    public IResumePipelineBuilder Use<TMiddleware>() where TMiddleware : class, IStageMiddleware
     {
         _middleware.Add(ActivatorUtilities.GetServiceOrCreateInstance<TMiddleware>(services));
         return this;
     }
-
-    /// <summary>Lets a builder be assigned to a ResumePipeline without calling Build().</summary>
-    public static implicit operator ResumePipeline(ResumePipelineBuilder builder) => builder.Build();
 
     public ResumePipeline Build()
     {
@@ -46,4 +39,6 @@ public sealed class ResumePipelineBuilder(IServiceProvider services)
 
         return new ResumePipeline(composed);
     }
+
+    public static implicit operator ResumePipeline(ResumePipelineBuilder builder) => builder.Build();
 }

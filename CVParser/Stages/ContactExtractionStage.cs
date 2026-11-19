@@ -1,8 +1,9 @@
 using System.Text.RegularExpressions;
-using Parser.Models;
-using Parser.Pipeline;
+using CVParser.Enums;
+using CVParser.Models;
+using CVParser.Pipeline;
 
-namespace Parser.Stages;
+namespace CVParser.Stages;
 
 public sealed partial class ContactExtractionStage : IPipelineStage
 {

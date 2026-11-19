@@ -1,9 +1,9 @@
 using System.Diagnostics;
 using Microsoft.Extensions.Logging;
-using Parser.Models;
-using Parser.Pipeline;
+using CVParser.Models;
+using CVParser.Pipeline;
 
-namespace Parser.Middleware;
+namespace CVParser.Middleware;
 
 public sealed class LoggingMiddleware(ILogger<LoggingMiddleware> log) : IStageMiddleware
 {

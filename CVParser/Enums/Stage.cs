@@ -1,4 +1,4 @@
-namespace Parser.Stages;
+namespace CVParser.Enums;
 
 public enum Stage
 {

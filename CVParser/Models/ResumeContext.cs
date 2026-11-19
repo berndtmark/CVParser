@@ -1,9 +1,8 @@
-namespace Parser.Models;
+namespace CVParser.Models;
 
 /// <summary>Shared state passed through every pipeline stage.</summary>
 public sealed class ResumeContext
 {
-    public required string SourcePath { get; init; }
     public PipelineOptions Options { get; init; } = new();
 
     public string? RawText { get; set; }
