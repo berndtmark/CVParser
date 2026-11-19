@@ -10,15 +10,7 @@ public sealed class LoggingMiddleware(ILogger<LoggingMiddleware> log) : IStageMi
     {
         var sw = Stopwatch.StartNew();
         log.LogInformation("{Stage} starting", stage.Name);
-        try
-        {
-            await next(context, ct);
-        }
-        catch (Exception ex)
-        {
-            log.LogError(ex, "{Stage} failed after {Ms}ms", stage.Name, sw.ElapsedMilliseconds);
-            throw;
-        }
+        await next(context, ct);
         log.LogInformation("{Stage} done in {Ms}ms", stage.Name, sw.ElapsedMilliseconds);
     }
 }

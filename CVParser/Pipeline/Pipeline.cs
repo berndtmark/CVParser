@@ -1,4 +1,3 @@
-using CVParser.Enums;
 
 namespace CVParser.Pipeline;
 
@@ -9,7 +8,7 @@ public sealed class Pipeline<TContext> where TContext : IPipelineContext, new()
     internal Pipeline(IReadOnlyList<(IPipelineStage, StageDelegate)> stages) => _stages = stages;
 
     /// <summary>Names of all stages, in order (e.g. to populate a UI picker).</summary>
-    public IEnumerable<Stage> Stages => _stages.Select(s => s.Stage.Name);
+    public IEnumerable<string> Stages => _stages.Select(s => s.Stage.Name);
 
     /// <summary>Creates a context from <paramref name="options"/>, runs every enabled stage, and returns it.</summary>
     public async Task<TContext> RunAsync(IPipelineOptions options, CancellationToken ct = default)

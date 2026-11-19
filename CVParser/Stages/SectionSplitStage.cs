@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using CVParser.Enums;
 using CVParser.Models;
 using CVParser.Pipeline;
 
@@ -8,7 +7,7 @@ namespace CVParser.Stages;
 /// <summary>Splits text into sections by common headings (Experience, Education, Skills...).</summary>
 public sealed partial class SectionSplitStage : IPipelineStage<ResumeContext>
 {
-    public Stage Name => Stage.SectionSplit;
+    public string Name => "SectionSplit";
 
     [GeneratedRegex(@"^\s*(summary|objective|experience|work experience|education|skills|projects|certifications)\s*:?\s*$",
         RegexOptions.IgnoreCase)]

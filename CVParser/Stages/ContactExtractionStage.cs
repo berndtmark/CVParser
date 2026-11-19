@@ -1,5 +1,4 @@
 using System.Text.RegularExpressions;
-using CVParser.Enums;
 using CVParser.Models;
 using CVParser.Pipeline;
 
@@ -7,7 +6,7 @@ namespace CVParser.Stages;
 
 public sealed partial class ContactExtractionStage : IPipelineStage<ResumeContext>
 {
-    public Stage Name => Stage.ContactExtraction;
+    public string Name => "ContactExtraction";
 
     [GeneratedRegex(@"[\w.+-]+@[\w-]+\.[\w.-]+")]
     private static partial Regex EmailRegex();

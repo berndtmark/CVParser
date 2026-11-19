@@ -10,17 +10,12 @@ namespace CVParser
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             await Process();
-
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                await Task.Delay(1000, stoppingToken);
-            }
         }
 
         private async Task Process()
         {
             var pipeline = pipelineBuilder
+                .Use<ErrorLoggingMiddleware>()
                 .Use<LoggingMiddleware>()
                 .Add<TextExtractionStage>()
                 .Add<SectionSplitStage>()
