@@ -9,11 +9,11 @@ public class PipelineRun : EntityBase
     public DateTime StartedAt { get; private set; }
 
     #region Behaviours
-    public static PipelineRun Start(string fileName)
+    public static PipelineRun Start(string fileName, Guid? id = null)
     {
         return new PipelineRun
         {
-            Id = Guid.NewGuid(),
+            Id = id ?? Guid.NewGuid(),
             FileName = fileName,
             StartedAt = DateTime.UtcNow,
         };

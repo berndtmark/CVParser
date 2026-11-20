@@ -6,5 +6,8 @@ namespace CVParser.Pipeline;
 /// </summary>
 public interface IPipelineContext
 {
+    /// <summary>Unique id of this run; set by the pipeline.</summary>
+    Guid RunId { get; init; }
+
     IPipelineOptions Options { get; init; }
 }

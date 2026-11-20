@@ -2,7 +2,8 @@ var builder = DistributedApplication.CreateBuilder(args);
 
 var postgres = builder.AddPostgres("postgres")
     .WithLifetime(ContainerLifetime.Persistent)
-    .WithDataVolume("cvparser-data");
+    .WithDataVolume("cvparser-data")
+    .WithPgWeb();
 
 var db = postgres.AddDatabase("cvparser-db");
 

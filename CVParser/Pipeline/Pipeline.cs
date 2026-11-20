@@ -13,7 +13,7 @@ public sealed class Pipeline<TContext> where TContext : IPipelineContext, new()
     /// <summary>Creates a context from <paramref name="options"/>, runs every enabled stage, and returns it.</summary>
     public async Task<TContext> RunAsync(IPipelineOptions options, CancellationToken ct = default)
     {
-        var context = new TContext { Options = options };
+        var context = new TContext { RunId = Guid.NewGuid(), Options = options };
         foreach (var (stage, invoke) in _stages)
         {
             ct.ThrowIfCancellationRequested();

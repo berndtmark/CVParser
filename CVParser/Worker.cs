@@ -17,6 +17,7 @@ namespace CVParser
             var pipeline = pipelineBuilder
                 .Use<ErrorLoggingMiddleware>()
                 .Use<LoggingMiddleware>()
+                .Use<ProgressMiddleware>()
                 .Add<TextExtractionStage>()
                 .Add<SectionSplitStage>()
                 .Add<ContactExtractionStage>()
