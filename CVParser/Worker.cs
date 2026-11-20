@@ -5,7 +5,7 @@ using CVParser.Stages;
 
 namespace CVParser
 {
-    public class Worker(ILogger<Worker> logger, IPipelineBuilder<ResumeContext> pipelineBuilder) : BackgroundService
+    public class Worker(IPipelineBuilder<ResumeContext> pipelineBuilder) : BackgroundService
     {
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {

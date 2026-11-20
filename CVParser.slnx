@@ -1,3 +1,5 @@
 <Solution>
+  <Project Path="CVParser.AppHost/CVParser.AppHost.csproj" Id="3e178bca-3984-4d1c-985c-5c9ca03676fe" />
+  <Project Path="CVParser.ServiceDefaults/CVParser.ServiceDefaults.csproj" />
   <Project Path="CVParser/CVParser.csproj" />
 </Solution>
