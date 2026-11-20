@@ -1,5 +1,13 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-builder.AddDotnetProject("cvparser", "../CVParser/CVParser.csproj");
+var postgres = builder.AddPostgres("postgres")
+    .WithLifetime(ContainerLifetime.Persistent)
+    .WithDataVolume("cvparser-data");
+
+var db = postgres.AddDatabase("cvparser-db");
+
+builder.AddDotnetProject("cvparser", "../CVParser/CVParser.csproj")
+    .WithReference(db)
+    .WaitFor(db);
 
 builder.Build().Run();
