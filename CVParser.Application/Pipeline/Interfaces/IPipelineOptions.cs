@@ -1,5 +1,4 @@
-
-namespace CVParser.Pipeline;
+namespace CVParser.Application.Pipeline.Interfaces;
 
 /// <summary>Per-run configuration handed to the pipeline.</summary>
 public interface IPipelineOptions

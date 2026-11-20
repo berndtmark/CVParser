@@ -1,4 +1,7 @@
-namespace CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace CVParser.Application.Pipeline;
 
 public sealed class PipelineBuilder<TContext>(IServiceProvider services) : IPipelineBuilder<TContext>
     where TContext : IPipelineContext, new()

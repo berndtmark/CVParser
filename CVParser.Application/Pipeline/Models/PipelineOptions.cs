@@ -1,6 +1,6 @@
-using CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
 
-namespace CVParser.Models;
+namespace CVParser.Application.Pipeline.Models;
 
 /// <summary>Per-run configuration passed into the pipeline (e.g. from the UI).</summary>
 public sealed class PipelineOptions : IPipelineOptions

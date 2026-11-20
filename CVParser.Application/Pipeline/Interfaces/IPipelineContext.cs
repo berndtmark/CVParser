@@ -1,4 +1,4 @@
-namespace CVParser.Pipeline;
+namespace CVParser.Application.Pipeline.Interfaces;
 
 /// <summary>
 /// Minimum a context type must expose to run through a pipeline.

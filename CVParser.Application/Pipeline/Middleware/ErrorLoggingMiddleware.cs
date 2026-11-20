@@ -1,7 +1,7 @@
 using Microsoft.Extensions.Logging;
-using CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
 
-namespace CVParser.Middleware;
+namespace CVParser.Application.Middleware;
 
 /// <summary>Logs any exception thrown by a stage and swallows it, so the pipeline carries on with the next stage.</summary>
 public sealed class ErrorLoggingMiddleware(ILogger<ErrorLoggingMiddleware> log) : IStageMiddleware

@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CVParser.Application\CVParser.Application.csproj" />
     <ProjectReference Include="..\CVParser.Infrastructure.Database\CVParser.Infrastructure.Database.csproj" />
     <ProjectReference Include="..\CVParser.ServiceDefaults\CVParser.ServiceDefaults.csproj" />
   </ItemGroup>

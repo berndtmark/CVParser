@@ -1,5 +1,4 @@
-
-namespace CVParser.Pipeline;
+namespace CVParser.Application.Pipeline.Interfaces;
 
 /// <summary>Non-generic view of a stage, so middleware doesn't need to know the context type.</summary>
 public interface IPipelineStage

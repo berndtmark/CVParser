@@ -1,5 +1,7 @@
 
-namespace CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
+
+namespace CVParser.Application.Pipeline;
 
 public sealed class Pipeline<TContext> where TContext : IPipelineContext, new()
 {

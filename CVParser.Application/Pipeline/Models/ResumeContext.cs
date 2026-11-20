@@ -1,6 +1,6 @@
-using CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
 
-namespace CVParser.Models;
+namespace CVParser.Application.Pipeline.Models;
 
 /// <summary>Shared state passed through every pipeline stage.</summary>
 public sealed class ResumeContext : IPipelineContext

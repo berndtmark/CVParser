@@ -1,7 +1,7 @@
-using CVParser.Models;
-using CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
+using CVParser.Application.Pipeline.Models;
 
-namespace CVParser.Stages;
+namespace CVParser.Application.Stages;
 
 /// <summary>Reads plain text. Swap/extend for PDF/DOCX later.</summary>
 public sealed class TextExtractionStage : IPipelineStage<ResumeContext>

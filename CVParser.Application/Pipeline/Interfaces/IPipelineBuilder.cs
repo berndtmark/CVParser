@@ -1,4 +1,4 @@
-namespace CVParser.Pipeline;
+namespace CVParser.Application.Pipeline.Interfaces;
 
 public interface IPipelineBuilder<TContext> where TContext : IPipelineContext, new()
 {

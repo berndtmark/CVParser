@@ -1,8 +1,8 @@
 using System.Text.RegularExpressions;
-using CVParser.Models;
-using CVParser.Pipeline;
+using CVParser.Application.Pipeline.Interfaces;
+using CVParser.Application.Pipeline.Models;
 
-namespace CVParser.Stages;
+namespace CVParser.Application.Stages;
 
 /// <summary>Splits text into sections by common headings (Experience, Education, Skills...).</summary>
 public sealed partial class SectionSplitStage : IPipelineStage<ResumeContext>

@@ -1,4 +1,4 @@
-namespace CVParser.Pipeline;
+namespace CVParser.Application.Pipeline.Interfaces;
 
 public delegate Task StageDelegate(IPipelineContext context, CancellationToken ct);
 
